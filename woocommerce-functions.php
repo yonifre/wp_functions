@@ -132,3 +132,17 @@ function prefix_add_discount_line( $cart ) {
   $cart->add_fee( __( 'Adjustment to minimum order (100$)', 'yourtext-domain' ) , +$minimum );
 }
 add_action( 'woocommerce_cart_calculate_fees', 'prefix_add_discount_line' );
+
+
+
+//////////////////// Add ACF field to woo customer_completed_order email
+add_action( 'woocommerce_email_order_details', 'bbloomer_add_content_specific_email', 10, 5 );
+function bbloomer_add_content_specific_email( $order, $sent_to_admin, $plain_text, $email ) {
+   if ( $email->id == 'customer_completed_order' ) {
+		$tracking = get_field('tracking');
+      if($tracking){
+            echo '<h3 class="email-tracking-title">Tracking number</h3><p class="email-tracking">Your tracking number is: '.$tracking.'</p>
+<p class="email-tracking">You can <a href="https://mypost.israelpost.co.il/itemtrace">track here</a></p>';
+      }
+   }
+}
