@@ -1,8 +1,8 @@
 <?php
 
-add_action( 'template_redirect', 'misha_redirect_depending_on_gateway' );
+add_action( 'template_redirect', 'sx_woo_redirect_ty_page' );
  
-function misha_redirect_depending_on_gateway(){
+function sx_woo_redirect_ty_page(){
 	/* do nothing if we are not on the appropriate page */
 	if( !is_wc_endpoint_url( 'order-received' ) || empty( $_GET['key'] ) ) {
 		return;
